@@ -1,5 +1,6 @@
 package com.example.firebaseauthpreference
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.btn_login
+import kotlinx.android.synthetic.main.activity_main.btn_logout
+import kotlinx.android.synthetic.main.activity_main.btn_register
+import kotlinx.android.synthetic.main.activity_main.et_email
+import kotlinx.android.synthetic.main.activity_main.et_password
+import kotlinx.android.synthetic.main.activity_main.tv_message
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,11 +30,18 @@ class MainActivity : AppCompatActivity() {
         btn_register.setOnClickListener {
             createEmailAccount()
         }
+
         btn_login.setOnClickListener {
             startSignIn(et_email.text.toString(), et_password.text.toString())
         }
+
         btn_logout.setOnClickListener {
             signOut()
+        }
+
+        btn_preference.setOnClickListener {
+            val intent = Intent (this, PreferenceActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -56,14 +70,18 @@ class MainActivity : AppCompatActivity() {
                 this@MainActivity
             ) { task ->
                 if (task.isSuccessful) {
+                    Toast.makeText(this@MainActivity, "Login Succeeded", Toast.LENGTH_SHORT).show()
+
+                    tv_message.text = App.prefs.myEditText
+                    et_email.text.clear()
+                    et_password.text.clear()
                     btn_logout.visibility = View.VISIBLE
                     btn_login.visibility = View.GONE
                     btn_register.visibility = View.GONE
-
-                    // Preference
-                    tv_message.text = App.prefs.myEditText
+                    et_email.visibility = View.GONE
+                    et_password.visibility = View.GONE
                 } else {
-                    Toast.makeText(this@MainActivity, "로그인 오류", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Login Failed", Toast.LENGTH_SHORT).show()
                 }
             }
     }
@@ -74,8 +92,9 @@ class MainActivity : AppCompatActivity() {
         btn_logout.visibility = View.GONE
         btn_login.visibility = View.VISIBLE
         btn_register.visibility = View.VISIBLE
+        et_email.visibility = View.VISIBLE
+        et_password.visibility = View.VISIBLE
 
         tv_message.text = "Please Login"
     }
-
 }

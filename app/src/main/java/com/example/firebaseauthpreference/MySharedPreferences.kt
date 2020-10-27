@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 class MySharedPreferences (context: Context) {
     private val prefsFilename = "prefs"
-    private val prefsKeyEdt = "myEditText"
+    private val prefsKeyEdt = "null"
     private val prefs: SharedPreferences = context.getSharedPreferences(prefsFilename,0)
 
     var myEditText: String?

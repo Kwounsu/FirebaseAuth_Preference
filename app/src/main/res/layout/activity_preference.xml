@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".PreferenceActivity"
     android:orientation="vertical"
     android:gravity="center">
 
@@ -53,9 +53,9 @@
         android:visibility="gone"/>
 
     <Button
-        android:id="@+id/btn_preference"
+        android:id="@+id/btn_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="pref"/>
+        android:text="Firebase Auth"/>
 
 </LinearLayout>
