@@ -18,9 +18,17 @@ class MainActivityTest {
     val activityRule = ActivityTestRule(MainActivity::class.java)
 
     @Test
-    fun listGoesOverTheFold() {
+    fun login() {
         onView(withId(R.id.et_email)).perform(typeText("klee21123@gmail.com"))
         onView(withId(R.id.et_password)).perform(typeText("12345678!")).perform(closeSoftKeyboard())
+        onView(withId(R.id.btn_login)).perform(click())
+    }
+
+    @Test
+    fun singUp() {
+        onView(withId(R.id.et_email)).perform(typeText("klee12345@gmail.com"))
+        onView(withId(R.id.et_password)).perform(typeText("12345678!")).perform(closeSoftKeyboard())
+        onView(withId(R.id.btn_register)).perform(click())
         onView(withId(R.id.btn_login)).perform(click())
     }
 }
